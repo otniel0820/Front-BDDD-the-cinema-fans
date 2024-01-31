@@ -20,7 +20,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Clientes",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center p-5">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.name}
           </Link>
         </div>
@@ -41,7 +41,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Fecha de contacto",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.contactDate}
           </Link>
         </div>
@@ -52,7 +52,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Fecha de comentarios",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.comments}
           </Link>
         </div>
@@ -63,7 +63,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Dispositivo",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.divice}
           </Link>
         </div>
@@ -74,7 +74,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Seguimiento",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.followUp}
           </Link>
         </div>
@@ -85,7 +85,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Fecha de seguimiento",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.followUpDate}
           </Link>
         </div>
@@ -96,7 +96,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Estatus",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.status}
           </Link>
         </div>
@@ -107,7 +107,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Es cliente",
       cell: (item) => (
         <div className="flex justify-center text-[#AFAFAF] items-center">
-          <Link href={`/user/${item.row.original.id}`}>
+          <Link href={`/${item.row.original.id}`}>
             {item.row.original.isClient}
           </Link>
         </div>
@@ -131,7 +131,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
           containerClassName="flex items-center gap-2"
         />
         <div className="flex gap-4">
-        <Link href={"/user/new-user"}>
+        <Link href={"/new-user"}>
             <Button variant={"primary"} size={"xl"} className="rounded-[5px]">
               Nuevo usuario
             </Button>

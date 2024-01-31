@@ -30,7 +30,7 @@ const SideBar = () => {
             <li>
               <Link
                 className="text-white hover:text-gray-300 block py-2.5 px-4 rounded transition duration-200"
-                href="/user"
+                href="/"
               >
                 Users
                 

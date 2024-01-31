@@ -7,12 +7,12 @@ import React from 'react'
 
 export default  function Page(){
 
-  const {isFetching, users}= useUser()
+  const {isLoading, users}= useUser()
   
   
   return (
     <div>
-      {isFetching?<Spinner/>:<UserTable users={users} />}
+      {isLoading?<Spinner/>:<UserTable users={users} />}
     </div>
   )
 }

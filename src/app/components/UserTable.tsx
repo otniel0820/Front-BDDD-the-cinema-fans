@@ -5,6 +5,10 @@ import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { InputText } from "./InputText";
 import { Button } from "./Button";
+import { CheckBox } from "./CheckBox";
+import { deleteUser } from "../data/api";
+import toast, { Toaster } from "react-hot-toast";
+import { Modal } from "./Modal";
 
 type User = {
   users: UserDTO[];
@@ -12,9 +16,68 @@ type User = {
 
 const UserTable: FunctionComponent<User> = ({ users }) => {
   const [filter, setFilter] = useState<string>("");
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [userSelected, setSelectedUser] = useState<UserDTO[]>([]);
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const handleCheckChange=(user: UserDTO)=> {
+    setSelectedUser((prev) => {
+      if (prev.includes(user)) {
+        return prev.filter((item) => item !== user);
+      } else {
+        return [...prev, user];
+      }
+    });
+  }
+  const deletedToast = () => toast("El usuario ha sido eliminado");
+  const handleDelete=(user:UserDTO[])=>{
+    deleteUser(user)
+    setIsModal(false);
+    deletedToast();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
+
   const columnHelper = createColumnHelper<UserDTO>();
   const columns = useMemo(()=>{
+    const handleChangeALL = () => {
+      setIsSelected(!isSelected);
+      if (!isSelected) {
+        setSelectedUser(users.map((user) => user));
+      } else {
+        setSelectedUser([]);
+      }
+    };
     return [
+      columnHelper.accessor((row) => row.id, {
+        id: "id",
+        header: () => (
+          <CheckBox
+            id=""
+            name=""
+            label=""
+            value={isSelected}
+            onChange={() => handleChangeALL()}
+            containerClassName="flex flex-col justify-center items-center"
+          />
+        ),
+        enableSorting: false,
+        cell: (item) => (
+          
+            <CheckBox
+              id=""
+              name=""
+              label=""
+              onChange={() => {
+                handleCheckChange(item.row.original);
+              }}
+              value={userSelected.includes(item.row.original)}
+              containerClassName="flex flex-col justify-center items-center"
+            />
+          
+        ),
+      }),
     columnHelper.accessor((row) => row.name, {
       id: "userName",
       header: () => "Clientes",
@@ -31,8 +94,8 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       header: () => "Ciudad y/o direccion",
       cell: (item) => (
         <div className="flex flex-col justify-center text-[#AFAFAF] items-center">
-          <p>{item.row.original.city}</p>
           <p>{item.row.original.address}</p>
+          <p>{item.row.original.city}</p>
         </div>
       ),
     }),
@@ -114,7 +177,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       ),
     }),
   ];
-  },[columnHelper])
+  },[columnHelper,userSelected,isSelected, users])
   
   
 
@@ -140,13 +203,48 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
             variant={"secondary"}
             size={"xl"}
             className="rounded-[5px] hover:bg-red-500 hover:text-white"
-            // onClick={() => {
-            //   setIsModal(!isModal);
-            // }}
-            // disabled={bannerSelected.length > 0 ? false : true}
+            onClick={() => {
+              setIsModal(!isModal);
+            }}
+            disabled={userSelected.length > 0 ? false : true}
+            // onClick={()=>handleDelete(userSelected)}
           >
             Eliminar
           </Button>
+          <Modal
+            isOpen={isModal}
+            onClose={() => {
+              setIsModal(!isModal);
+            }}
+            bg="bg-[#f0e9e9]"
+          >
+            <div className="w-full flex flex-col items-center gap-4 rounded-">
+              <div> ¿Seguro que desea eliminar este usuario?</div>
+              <div className="flex justify-center gap-6">
+                <Button
+                  variant={"primary"}
+                  className="rounded"
+                  onClick={() => {
+                    handleDelete(userSelected);
+                  }}
+                  size={"lg"}
+                >
+                  Si
+                </Button>
+                <Button
+                  variant={"secondary"}
+                  className="rounded"
+                  onClick={() => setIsModal(!isModal)}
+                  size={"lg"}
+                >
+                  No
+                </Button>
+              </div>
+            </div>
+          </Modal>
+          <Toaster
+            toastOptions={{ style: { background: "#239e48", color: "#fff" } }}
+          />
         </div>
       </article>
 

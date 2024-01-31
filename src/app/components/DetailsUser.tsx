@@ -1,25 +1,24 @@
-import React, { FunctionComponent } from 'react'
-import { UserDTO } from '../interfaces/usersEntity';
-import { format } from 'path';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { ChevronRight } from 'lucide-react';
-import { InputText } from './InputText';
-import Link from 'next/link';
-import { boolean } from 'zod';
-import { Button } from './Button';
-
-
+import React, { FunctionComponent } from "react";
+import { UserDTO } from "../interfaces/usersEntity";
+import { format } from "path";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { ChevronRight } from "lucide-react";
+import { InputText } from "./InputText";
+import Link from "next/link";
+import { boolean } from "zod";
+import { Button } from "./Button";
+import { updateUser } from "../data/api";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 type User = {
-    user: UserDTO
-}
-const DetailsUser: FunctionComponent<User> = ({user}) => {
+  user: UserDTO;
+};
+const DetailsUser: FunctionComponent<User> = ({ user }) => {
+  const userDetail = user;
+  const router = useRouter();
 
-  const userDetail= user
-
-  
-  
-  const { handleSubmit, control} = useForm({
+  const { handleSubmit, control } = useForm({
     mode: "onChange",
     defaultValues: {
       name: userDetail.name || "",
@@ -38,15 +37,18 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
     },
   });
 
-
-  const handleOnSubmit = (data:any) => {
-    console.log(data);
-    // Aquí puedes realizar acciones con los datos enviados
+  const updateToast = () => toast("El usuario ha sido modificado");
+  const handleOnSubmit =  (data: any) => {
+    updateUser(userDetail.id, data);
+    updateToast();
+    setTimeout(() => {
+      router.push("/");
+    }, 1200);
   };
   return (
     <div className="flex flex-col gap-10">
       <section className="flex  items-center">
-        <Link href={"/user"}>
+        <Link href={"/"}>
           <h1 className="font-semibold">Usuarios</h1>
         </Link>
         <ChevronRight />
@@ -57,7 +59,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
         onSubmit={handleSubmit(handleOnSubmit)}
       >
         <article className="sm:col-span-4 w-full flex gap-20">
-          <section className='sm:col-span-4 w-full flex flex-col gap-7'>
+          <section className="sm:col-span-4 w-full flex flex-col gap-7">
             <Controller
               control={control}
               name="name"
@@ -75,7 +77,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="name"
-                    label='Nombre'
+                    label="Nombre"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -86,7 +88,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="contactDate"
               defaultValue=""
@@ -103,7 +105,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="contactDate"
-                    label='Fecha de contacto'
+                    label="Fecha de contacto"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -114,7 +116,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="divice"
               defaultValue=""
@@ -131,7 +133,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="divice"
-                    label='Dispositivo'
+                    label="Dispositivo"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -142,7 +144,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="address"
               defaultValue=""
@@ -159,7 +161,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="address"
-                    label='Direccion'
+                    label="Direccion"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -170,7 +172,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="city"
               defaultValue=""
@@ -187,7 +189,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="city"
-                    label='Ciudad'
+                    label="Ciudad"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -199,7 +201,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
               )}
             />
           </section>
-          <section className='sm:col-span-4 w-full flex flex-col gap-7'>
+          <section className="sm:col-span-4 w-full flex flex-col gap-7">
             <Controller
               control={control}
               name="status"
@@ -217,7 +219,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="status"
-                    label='Estatus'
+                    label="Estatus"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -228,7 +230,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="followUp"
               defaultValue=""
@@ -245,7 +247,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="followUp"
-                    label='Seguimiento'
+                    label="Seguimiento"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -256,7 +258,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="followUpDate"
               defaultValue=""
@@ -273,7 +275,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="followUpDate"
-                    label='Fecha de seguimiento'
+                    label="Fecha de seguimiento"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -284,7 +286,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="comments"
               defaultValue=""
@@ -301,7 +303,7 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="comments"
-                    label='Comentarios'
+                    label="Comentarios"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -312,10 +314,10 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 </div>
               )}
             />
-        <Controller
+            <Controller
               control={control}
               name="isClient"
-              defaultValue=''
+              defaultValue=""
               rules={{
                 required: {
                   value: true,
@@ -329,8 +331,8 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
                 <div className="flex space-x-10 items-center sm:col-span-4 w-full">
                   <InputText
                     id="isClient"
-                    label='Es cliente'
-                    value={value || ''}
+                    label="Es cliente"
+                    value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}
                     error={error?.message}
@@ -341,22 +343,23 @@ const DetailsUser: FunctionComponent<User> = ({user}) => {
               )}
             />
           </section>
-        
         </article>
-          <div className="flex  gap-2 justify-center">
-            
-              <Button variant={"primary"} size={"lg"} className='rounded-lg'>
-              Guardar
+        <div className="flex  gap-2 justify-center">
+          <Button variant={"primary"} size={"lg"} className="rounded-lg">
+            Guardar
+          </Button>
+          <Link href={"/banner"}>
+            <Button variant={"secondary"} size={"lg"} className="rounded-lg">
+              Cancelar
             </Button>
-            <Link href={"/banner"}>
-              <Button variant={"secondary"} size={"lg"} className='rounded-lg'>
-                Cancelar
-              </Button>
-            </Link>
-          </div>
+          </Link>
+        </div>
       </form>
+      <Toaster
+        toastOptions={{ style: { background: "#239e48", color: "#fff" } }}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default DetailsUser
+export default DetailsUser;

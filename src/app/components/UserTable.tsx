@@ -131,7 +131,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
           containerClassName="flex items-center gap-2"
         />
         <div className="flex gap-4">
-        <Link href={"/banner/new_banner"}>
+        <Link href={"/user/new-user"}>
             <Button variant={"primary"} size={"xl"} className="rounded-[5px]">
               Nuevo usuario
             </Button>

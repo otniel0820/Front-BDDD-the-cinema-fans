@@ -30,17 +30,18 @@ const SideBar = () => {
             <li>
               <Link
                 className="text-white hover:text-gray-300 block py-2.5 px-4 rounded transition duration-200"
-                href="/blog"
+                href="/user"
               >
-                Blog
+                Users
+                
               </Link>
             </li>
             <li>
               <Link
                 className="text-white hover:text-gray-300 block py-2.5 px-4 rounded transition duration-200"
-                href="/user"
+                href="/blog"
               >
-                Users
+                Blog
               </Link>
             </li>
           </ul>

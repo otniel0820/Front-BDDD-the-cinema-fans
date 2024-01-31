@@ -1,12 +1,19 @@
+'use client'
+
 import UserTable from '@/app/components/UserTable'
+import { useUser } from '@/app/hooks/useUser'
 import React from 'react'
 
-const page = () => {
+export default  function Page(){
+
+  const {isLoading, users}= useUser()
+  
+  
   return (
     <div>
-      <UserTable/>
+      <UserTable users={users}/>
     </div>
   )
 }
 
-export default page
+

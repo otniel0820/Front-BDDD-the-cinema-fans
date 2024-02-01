@@ -57,7 +57,7 @@ export function Table<D>({
   const cellClassName = classNames(commonClass, {});
 
   return (
-    <div className="mt-4 w-full flex flex-col ">
+    <div className="mt-4 w-full flex flex-col">
       <div className="-my-2 -mx-4 min-w-full md:overflow-x-auto lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
           <div className="block overflow-hidden  shadow ring-1 ring-black ring-opacity-5  ">

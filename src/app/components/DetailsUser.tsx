@@ -34,6 +34,7 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
       followUpDate: userDetail.followUpDate || "",
       comments: userDetail.comments || "",
       isClient: userDetail.isClient || "",
+      source: userDetail.source || "",
     },
   });
 
@@ -200,8 +201,6 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
                 </div>
               )}
             />
-          </section>
-          <section className="sm:col-span-4 w-full flex flex-col gap-7">
             <Controller
               control={control}
               name="status"
@@ -230,6 +229,9 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
                 </div>
               )}
             />
+          </section>
+          <section className="sm:col-span-4 w-full flex flex-col gap-7">
+            
             <Controller
               control={control}
               name="followUp"
@@ -248,6 +250,34 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
                   <InputText
                     id="followUp"
                     label="Seguimiento"
+                    value={value || ""}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    error={error?.message}
+                    containerClassName="sm:col-span-4 w-full"
+                    inputClassName="rounded-[0.3em] h-full sm:w-full"
+                  />
+                </div>
+              )}
+            />
+            <Controller
+              control={control}
+              name="source"
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "Este campo es requerido",
+                },
+              }}
+              render={({
+                field: { onChange, onBlur, value },
+                fieldState: { error },
+              }) => (
+                <div className="flex space-x-10 items-center sm:col-span-4 w-full">
+                  <InputText
+                    id="source"
+                    label="Fuente"
                     value={value || ""}
                     onChange={onChange}
                     onBlur={onBlur}

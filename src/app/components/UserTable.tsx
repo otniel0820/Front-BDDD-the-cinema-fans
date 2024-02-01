@@ -93,7 +93,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       id: "city",
       header: () => "Ciudad y/o direccion",
       cell: (item) => (
-        <div className="flex flex-col justify-center text-[#AFAFAF] items-center">
+        <div className="flex flex-col justify-center text-[#AFAFAF] items-center p-5">
           <p>{item.row.original.address}</p>
           <p>{item.row.original.city}</p>
         </div>
@@ -103,7 +103,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       id: "contactDate",
       header: () => "Fecha de contacto",
       cell: (item) => (
-        <div className="flex justify-center text-[#AFAFAF] items-center">
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
           <Link href={`/${item.row.original.id}`}>
             {item.row.original.contactDate}
           </Link>
@@ -112,9 +112,9 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
     }),
     columnHelper.accessor((row) => row.comments, {
       id: "comments",
-      header: () => "Fecha de comentarios",
+      header: () => "Comentarios",
       cell: (item) => (
-        <div className="flex justify-center text-[#AFAFAF] items-center">
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
           <Link href={`/${item.row.original.id}`}>
             {item.row.original.comments}
           </Link>
@@ -125,7 +125,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       id: "divice",
       header: () => "Dispositivo",
       cell: (item) => (
-        <div className="flex justify-center text-[#AFAFAF] items-center">
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
           <Link href={`/${item.row.original.id}`}>
             {item.row.original.divice}
           </Link>
@@ -136,9 +136,20 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       id: "followUp",
       header: () => "Seguimiento",
       cell: (item) => (
-        <div className="flex justify-center text-[#AFAFAF] items-center">
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
           <Link href={`/${item.row.original.id}`}>
             {item.row.original.followUp}
+          </Link>
+        </div>
+      ),
+    }),
+    columnHelper.accessor((row) => row.source, {
+      id: "source",
+      header: () => "Fuente",
+      cell: (item) => (
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
+          <Link href={`/${item.row.original.id}`}>
+            {item.row.original.source}
           </Link>
         </div>
       ),
@@ -147,7 +158,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       id: "followDate",
       header: () => "Fecha de seguimiento",
       cell: (item) => (
-        <div className="flex justify-center text-[#AFAFAF] items-center">
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
           <Link href={`/${item.row.original.id}`}>
             {item.row.original.followUpDate}
           </Link>
@@ -158,7 +169,7 @@ const UserTable: FunctionComponent<User> = ({ users }) => {
       id: "status",
       header: () => "Estatus",
       cell: (item) => (
-        <div className="flex justify-center text-[#AFAFAF] items-center">
+        <div className="flex justify-center text-[#AFAFAF] items-center p-5">
           <Link href={`/${item.row.original.id}`}>
             {item.row.original.status}
           </Link>

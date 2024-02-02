@@ -16,13 +16,11 @@ import classNames from "classnames";
 import {
   ArrowBigDownDash,
   ArrowBigUpDash,
-  ArrowLeftIcon,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { Button } from "./Button";
 
 export interface TableProps<D> {
   columns: unknown;
@@ -40,7 +38,6 @@ export function Table<D>({
   onChangeFilter = () => {
     /* */
   },
-  isDense,
   initialColumnSort = undefined,
 }: TableProps<D>) {
   const [sortingState, setSortingState] = useState<SortingState>(
@@ -154,7 +151,6 @@ export function Table<D>({
             </table>
           </div>
           <div className="w-full flex items-center justify-center gap-4 py-2">
-            
             <ChevronsLeft
               onClick={() =>
                 table.getCanPreviousPage() && table.setPageIndex(0)
@@ -166,9 +162,8 @@ export function Table<D>({
               className="cursor-pointer"
             />
             <span className="flex items-center gap-1">
-              <div>Page</div>
               <strong>
-                {table.getState().pagination.pageIndex + 1} de {" "}
+                {table.getState().pagination.pageIndex + 1} de{" "}
                 {table.getPageCount()}
               </strong>
             </span>
@@ -183,7 +178,6 @@ export function Table<D>({
               }
               className="cursor-pointer"
             />
-            
           </div>
         </div>
       </div>

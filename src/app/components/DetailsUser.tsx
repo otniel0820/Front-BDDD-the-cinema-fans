@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { UserDTO } from "../interfaces/usersEntity";
-import { format } from "path";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { ChevronRight } from "lucide-react";
 import { InputText } from "./InputText";
 import Link from "next/link";
-import { boolean } from "zod";
 import { Button } from "./Button";
 import { updateUser } from "../data/api";
 import { useRouter } from "next/navigation";
@@ -39,7 +37,7 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
   });
 
   const updateToast = () => toast("El usuario ha sido modificado");
-  const handleOnSubmit =  (data: any) => {
+  const handleOnSubmit = (data: any) => {
     updateUser(userDetail.id, data);
     updateToast();
     setTimeout(() => {
@@ -231,7 +229,6 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
             />
           </section>
           <section className="sm:col-span-4 w-full flex flex-col gap-7">
-            
             <Controller
               control={control}
               name="followUp"

@@ -1,8 +1,8 @@
 'use client'
 
 
-import UserTable from '@/app/components/UserTable'
-import { useUser } from '@/app/hooks/useUser'
+import UserTable from '@/components/UserTable'
+import { useUser } from '@/hooks/useUser'
 import React from 'react'
 
 export default  function Page(){

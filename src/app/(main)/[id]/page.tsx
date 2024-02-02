@@ -1,7 +1,7 @@
 'use client'
 
-import DetailsUser from "@/app/components/DetailsUser"
-import { useUserById } from "@/app/hooks/useUserById"
+import DetailsUser from "@/components/DetailsUser"
+import { useUserById } from "@/hooks/useUserById"
 
 
 export  default  function Page({ params }: { params: { id: string } }) {

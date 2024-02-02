@@ -1,4 +1,4 @@
-import NewUser from '@/app/components/NewUser'
+import NewUser from '@/components/NewUser'
 import React from 'react'
 
 const page = () => {

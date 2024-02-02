@@ -374,7 +374,7 @@ const NewUser: FunctionComponent = () => {
           <Button variant={"primary"} size={"lg"} className="rounded-lg">
             Guardar
           </Button>
-          <Link href={"/banner"}>
+          <Link href={"/"}>
             <Button variant={"secondary"} size={"lg"} className="rounded-lg">
               Cancelar
             </Button>

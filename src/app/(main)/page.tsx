@@ -7,12 +7,12 @@ import React from 'react'
 
 export default  function Page(){
 
-  const {isLoading, users}= useUser()
+  const {users}= useUser()
   
   
   return (
     <div>
-      {isLoading?<Spinner/>:<UserTable users={users} />}
+      {<UserTable users={users} />}
     </div>
   )
 }

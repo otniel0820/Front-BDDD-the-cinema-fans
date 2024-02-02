@@ -29,7 +29,7 @@ const NewUser: FunctionComponent = () => {
       followUpDate: "",
       comments: "",
       isClient: "",
-      source: ''
+      source: "",
     },
   });
   const creationToast = () => toast("Nuevo usuario creado");
@@ -37,7 +37,6 @@ const NewUser: FunctionComponent = () => {
     createUser(data);
     creationToast();
     setTimeout(() => {
-      
       route.push("/");
     }, 1000);
   };
@@ -196,7 +195,7 @@ const NewUser: FunctionComponent = () => {
                   />
                 </div>
               )}
-            /> 
+            />
             <Controller
               control={control}
               name="status"
@@ -227,7 +226,6 @@ const NewUser: FunctionComponent = () => {
             />
           </section>
           <section className="sm:col-span-4 w-full flex flex-col gap-7">
-           
             <Controller
               control={control}
               name="followUp"

@@ -1,18 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ColumnDef,
   ColumnSort,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 import classNames from "classnames";
-import { ArrowBigDownDash, ArrowBigUpDash } from "lucide-react";
+import {
+  ArrowBigDownDash,
+  ArrowBigUpDash,
+  ArrowLeftIcon,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
+import { Button } from "./Button";
 
 export interface TableProps<D> {
   columns: unknown;
@@ -49,6 +59,7 @@ export function Table<D>({
     onSortingChange: setSortingState,
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: onChangeFilter,
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   const commonClass =
@@ -56,10 +67,30 @@ export function Table<D>({
 
   const cellClassName = classNames(commonClass, {});
 
+  useEffect(() => {
+    table.setPageSize(5);
+  }, [table]);
   return (
     <div className="mt-4 w-full flex flex-col">
       <div className="-my-2 -mx-4 min-w-full md:overflow-x-auto lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+          <div className="w-[90%] flex gap-2 items-center py-2">
+            <p>Usuarios en tabla </p>
+            <select
+              className="text-black"
+              /* Valor inicial 5 */
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+            >
+              {[5, 10, 20, 30, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="block overflow-hidden  shadow ring-1 ring-black ring-opacity-5  ">
             <table className="min-w-full divide-y divide-gray-300 ">
               <thead className="sticky top-0 left-0 right-0 bg-[#EEEEEE]">
@@ -121,6 +152,38 @@ export function Table<D>({
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="w-full flex items-center justify-center gap-4 py-2">
+            
+            <ChevronsLeft
+              onClick={() =>
+                table.getCanPreviousPage() && table.setPageIndex(0)
+              }
+              className="cursor-pointer"
+            />
+            <ChevronLeft
+              onClick={() => table.getCanPreviousPage() && table.previousPage()}
+              className="cursor-pointer"
+            />
+            <span className="flex items-center gap-1">
+              <div>Page</div>
+              <strong>
+                {table.getState().pagination.pageIndex + 1} de {" "}
+                {table.getPageCount()}
+              </strong>
+            </span>
+            <ChevronRight
+              onClick={() => table.getCanNextPage() && table.nextPage()}
+              className="cursor-pointer"
+            />
+            <ChevronsRight
+              onClick={() =>
+                table.getCanNextPage() &&
+                table.setPageIndex(table.getPageCount() - 1)
+              }
+              className="cursor-pointer"
+            />
+            
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export function Table<D>({
             <p>Usuarios en tabla </p>
             <select
               className="text-black"
-              /* Valor inicial 5 */
+              
               value={table.getState().pagination.pageSize}
               onChange={(e) => {
                 table.setPageSize(Number(e.target.value));

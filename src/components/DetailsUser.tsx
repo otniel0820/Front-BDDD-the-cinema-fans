@@ -19,20 +19,20 @@ const DetailsUser: FunctionComponent<User> = ({ user }) => {
   const { handleSubmit, control } = useForm({
     mode: "onChange",
     defaultValues: {
-      name: userDetail.name || "",
-      contactDate: userDetail.contactDate || "",
-      divice: userDetail.divice || "",
-      address: userDetail.address || "",
-      city: userDetail.city || "",
+      name: userDetail?.name || "",
+      contactDate: userDetail?.contactDate || "",
+      divice: userDetail?.divice || "",
+      address: userDetail?.address || "",
+      city: userDetail?.city || "",
       // createdAt:
       //   format(parseISO(userDetail.publicationDate), "yyyy-MM-dd") || "",
       // eventDate: format(parseISO(userDetail.eventDate), "yyyy-MM-dd") || "",
-      status: userDetail.status || "",
-      followUp: userDetail.followUp || "",
-      followUpDate: userDetail.followUpDate || "",
-      comments: userDetail.comments || "",
-      isClient: userDetail.isClient || "",
-      source: userDetail.source || "",
+      status: userDetail?.status || "",
+      followUp: userDetail?.followUp || "",
+      followUpDate: userDetail?.followUpDate || "",
+      comments: userDetail?.comments || "",
+      isClient: userDetail?.isClient || "",
+      source: userDetail?.source || "",
     },
   });
 

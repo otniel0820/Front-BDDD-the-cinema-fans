@@ -10,7 +10,7 @@ export  default  function Page({ params }: { params: { id: string } }) {
 
     return(
         <div>
-            {<DetailsUser  user={data} />}
+            {data && <DetailsUser  user={data} />}
         </div>
     )
 }

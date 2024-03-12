@@ -2,7 +2,7 @@
 
 import { UserDTO } from "../interfaces/usersEntity";
 
-const url = 'https://bddd-the-cinema-fans.vercel.app/api/user'
+const url = 'http://localhost:8080/api/user'
 export const getUsers = async () => {
     try {
         const response = await fetch(url, { cache: "no-cache" });
